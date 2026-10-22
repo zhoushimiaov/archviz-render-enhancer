@@ -163,6 +163,15 @@ def fit_slot(src, w, h, bg=(14, 14, 16)):
     return canvas
 
 
+def measure_mixed(draw, text, size, cjk="Light"):
+    """中英混排文本的像素宽度：中文用思源黑体，拉丁/数字用 Montserrat。"""
+    w = 0.0
+    for ch in text:
+        f = shan(cjk, size) if ord(ch) > 0x2E80 else mon("Light", size)
+        w += draw.textlength(ch, font=f)
+    return w
+
+
 def poster(args):
     img = Image.new("RGB", (W, H), (20, 20, 22))
     if args.hero and os.path.exists(args.hero):
@@ -185,13 +194,15 @@ def poster(args):
 
     if args.sub:
         f = mon("Light", args.sub_size)
-        tw = d.textlength(args.sub, font=f)
+        tw = measure_mixed(d, args.sub, args.sub_size, cjk="Light")
+        br_w = d.textlength("[", font=f)
+        pad = int(f.size * 0.45)
         bx0 = M + 30
-        bx1 = bx0 + tw + f.size * 1.5
+        bx1 = bx0 + pad + br_w + int(tw) + br_w + pad
         d.rectangle((bx0, y - 10, bx1, y + f.size + 12), fill=(14, 14, 16))
-        d.text((bx0 + f.size * 0.2, y), "[", font=f, fill=WHITE)
-        x = mix_text(d, (bx0 + f.size * 0.7, y), args.sub, args.sub_size, WHITE, cjk="Light")
-        d.text((x + f.size * 0.2, y), "]", font=f, fill=WHITE)
+        d.text((bx0 + pad, y), "[", font=f, fill=WHITE)
+        x = mix_text(d, (bx0 + pad + br_w + 6, y), args.sub, args.sub_size, WHITE, cjk="Light")
+        d.text((x + 6, y), "]", font=f, fill=WHITE)
 
     if args.extra and args.show_bottom:
         mix_text(d, (M + 44, H - 176), args.extra, 28, (246, 246, 248))
