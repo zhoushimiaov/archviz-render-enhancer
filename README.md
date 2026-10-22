@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="images/cover-og.png" alt="图像真实感增强及放大 · 三管线实测对比" width="100%">
+</p>
+
 # 图像真实感增强及放大 · Archviz Render Enhancer
 
 > ComfyUI 技能包：建筑与室内效果图的 AI 增强三管线 —— **FLUX2-Klein 语义重绘**、**N卡 DLSS5 图像增强+放大**、**SeedVR2 生成式超分**。
