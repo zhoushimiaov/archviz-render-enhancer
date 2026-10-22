@@ -1,0 +1,50 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "input.png"
+    }
+  },
+  "2": {
+    "class_type": "DLSS5Settings",
+    "inputs": {
+      "upscaling_mode": "2x (Performance)",
+      "nr_preset": "Default",
+      "nr_style": "Default",
+      "nr_intensity": 1.0,
+      "local_tone_strength": 1.0,
+      "local_structure_strength": 1.5,
+      "skin_structure_strength": 2.0,
+      "automatic_mask": true,
+      "dlss_model_preset": "M",
+      "motion": "auto",
+      "scene_change_threshold": 0.24,
+      "warmup_frames": 0,
+      "runtime_dir": ""
+    }
+  },
+  "3": {
+    "class_type": "DLSS5EnhanceImages",
+    "inputs": {
+      "images": [
+        "1",
+        0
+      ],
+      "settings": [
+        "2",
+        0
+      ],
+      "verify_neural_rendering": true
+    }
+  },
+  "4": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "3",
+        0
+      ],
+      "filename_prefix": "DLSS5_test_2x"
+    }
+  }
+}
