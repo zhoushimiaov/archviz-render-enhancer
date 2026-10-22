@@ -105,7 +105,7 @@ cold_models:
 | DLSS5 报 worker 未在 60 秒内退出 | 运行时收尾偶发超时 | 重跑该次任务即可 |
 | 提交返回 400 | 节点输入名/枚举值不对 | 看响应体 `node_errors`：`CFGGuider` 用 `positive`/`negative`；SeedVR2 `device` 必须是 `cuda:0` |
 
-完整排障见 [docs/图像真实感增强与放大_使用手册.md](docs/图像真实感增强与放大_使用手册.md) 第七章。
+完整排障见 [docs/manual-zh.md](docs/manual-zh.md) 第七章。
 
 ## 目录结构
 
